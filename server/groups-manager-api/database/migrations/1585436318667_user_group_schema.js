@@ -9,6 +9,7 @@ class UserGroupSchema extends Schema {
       table.increments()
       table.integer('user_id').notNullable().unsigned().references('id').inTable('users')
       table.integer('group_id').notNullable().unsigned().references('id').inTable('groups')
+      table.timestamps()
     })
   }
 

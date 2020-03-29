@@ -22,7 +22,7 @@ Route.get('/', () => {
 
 // Auth
 Route.group(() => {
-  Route.post('login', 'UserController.store')
+  Route.post('login', 'AuthController.login')
 }).prefix('auth')
 
 
@@ -33,11 +33,11 @@ Route.group(() => {
 }).prefix('users')
 
 // Groups
-Route.resource('groups', 'GroupController').apiOnly()
+Route.resource('groups', 'GroupController').apiOnly().middleware('auth')
 
 // Memberships
 Route.group(() => {
   Route.get(':groupId/members', 'MembershipController.getGroupMembers')
   Route.post('joinGroup', 'MembershipController.joinGroup')
   Route.get(':groupId/members/:memberId/remove', 'MembershipController.removeGroupMember')
-}).prefix('membership')
+}).prefix('membership').middleware('auth')

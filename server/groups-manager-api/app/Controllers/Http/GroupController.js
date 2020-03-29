@@ -51,13 +51,17 @@ class GroupController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {
-    const data = request.only(['name', 'admin_id'])
+  async store({ request, response, auth }) {
+    let data = request.only(['name'])
+
+    //making sure admin id is the id of the current user
+    data = { ...data, admin_id: auth.user.id }
     const validation = await validate(data, this.rules)
 
     if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
 
-    return await Group.create(data)
+    await Group.create(data)
+    return auth.user
   }
 
   /**
