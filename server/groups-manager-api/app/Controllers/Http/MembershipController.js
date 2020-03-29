@@ -22,15 +22,12 @@ class MembershipController {
 
   async removeGroupMember({ params, response }) {
     const { groupId, memberId } = params
-
-
     return await Membership
       .query()
       .where('group_id', groupId)
       .andWhere('user_id', memberId)
       .delete()
   }
-
 
   async joinGroup({ request, response }) {
     const data = request.only(['user_id', 'group_id'])
@@ -43,8 +40,5 @@ class MembershipController {
 
     return await Membership.create(data)
   }
-
-
 }
-
 module.exports = MembershipController
