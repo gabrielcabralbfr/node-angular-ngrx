@@ -14,7 +14,7 @@ class UserController {
   get rules() {
     return {
       email: 'required|email',
-      username: 'required',
+      username: 'required|unique:users',
       password: 'required'
     }
   }
@@ -33,18 +33,6 @@ class UserController {
   }
 
   /**
-   * Render a form to be used for creating a new user.
-   * GET users/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create({ request, response, view }) {
-  }
-
-  /**
    * Create/save a new user.
    * POST users
    *
@@ -57,31 +45,7 @@ class UserController {
 
     const validation = await validate(data, this.rules)
     if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
-    return
-  }
-
-  /**
-   * Display a single user.
-   * GET users/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing user.
-   * GET users/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit({ params, request, response, view }) {
+    return await User.create(data)
   }
 
   /**
