@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: "${DB_POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${DB_POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${DB_POSTGRES_DATABASE}"
+      PGDATA: /tmp
+    ports:
+      - "${DB_POSTGRES_PORT}:5432"
+    volumes:
+      -  ./database/postgres/data:/var/lib/postgresql/data
+    networks:
+      - local-postgres-db
+
+volumes:
+  pgdata:
+  mongodb:
+
+networks:
+  local-postgres-db:
+    driver: bridge
