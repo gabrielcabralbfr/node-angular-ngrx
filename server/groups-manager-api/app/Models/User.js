@@ -34,6 +34,10 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+  groups() {
+    return this.belongsToMany('App/Models/Group').pivotTable('user_groups')
+  }
 }
 
 module.exports = User
