@@ -7,8 +7,8 @@ class UserGroupSchema extends Schema {
   up () {
     this.create('user_groups', (table) => {
       table.increments()
-      table.integer('user_id').notNullabe().unsigned().references('id').inTable('users')
-      table.integer('group_id').notNullabe().unsigned().references('id').inTable('groups')
+      table.integer('user_id').notNullable().unsigned().references('id').inTable('users')
+      table.integer('group_id').notNullable().unsigned().references('id').inTable('groups')
     })
   }
 

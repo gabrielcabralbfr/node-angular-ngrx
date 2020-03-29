@@ -9,7 +9,7 @@ class GroupSchema extends Schema {
       table.increments()
 
       table.string('name', 250).notNullable()
-      table.interger('admin_id').notNullable().unsigned().references('id').inTable('users')
+      table.integer('admin_id').notNullable().unsigned().references('id').inTable('users')
 
       table.timestamps()
     })

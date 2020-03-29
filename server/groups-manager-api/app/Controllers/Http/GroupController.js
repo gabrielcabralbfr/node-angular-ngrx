@@ -13,7 +13,8 @@ const { validate } = use('Validator')
 class GroupController {
   get rules() {
     return {
-      name: 'required'
+      name: 'required',
+      admin_id: 'required'
     }
   }
 
@@ -27,7 +28,7 @@ class GroupController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    return await Group.all()
+    return await Group.query().with('admin').fetch()
   }
 
   /**
@@ -51,7 +52,7 @@ class GroupController {
    * @param {Response} ctx.response
    */
   async store({ request, response }) {
-    const data = request.only('name')
+    const data = request.only(['name', 'admin_id'])
     const validation = await validate(data, this.rules)
 
     if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
