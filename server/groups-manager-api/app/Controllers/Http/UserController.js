@@ -8,8 +8,16 @@
  * Resourceful controller for interacting with users
  */
 const User = use("App/Models/User")
+const { validate } = use('Validator')
 
 class UserController {
+  get rules() {
+    return {
+      email: 'required|email',
+      username: 'required',
+      password: 'required'
+    }
+  }
   /**
    * Show a list of all users.
    * GET users
@@ -19,7 +27,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index({ request, response, view }) {
     return await User.query().fetch()
 
   }
@@ -33,7 +41,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
+  async create({ request, response, view }) {
   }
 
   /**
@@ -44,7 +52,12 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store({ request, response }) {
+    const data = request.all()
+
+    const validation = await validate(data, this.rules)
+    if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
+    return
   }
 
   /**
@@ -56,7 +69,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show({ params, request, response, view }) {
   }
 
   /**
@@ -68,7 +81,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit({ params, request, response, view }) {
   }
 
   /**
@@ -79,7 +92,7 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update({ params, request, response }) {
   }
 
   /**
@@ -90,7 +103,7 @@ class UserController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
   }
 }
 

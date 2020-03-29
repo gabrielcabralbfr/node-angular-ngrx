@@ -5,11 +5,18 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Group = use("App/Models/Group")
+const { validate } = use('Validator')
 
 /**
  * Resourceful controller for interacting with groups
  */
 class GroupController {
+  get rules() {
+    return {
+      name: 'required'
+    }
+  }
+
   /**
    * Show a list of all groups.
    * GET groups
@@ -45,6 +52,10 @@ class GroupController {
    */
   async store({ request, response }) {
     const data = request.only('name')
+    const validation = await validate(data, this.rules)
+
+    if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
+
     return await Group.create(data)
   }
 
@@ -68,19 +79,17 @@ class GroupController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request }) {
+  async update({ params, request, response }) {
     if (!Object.keys(params).includes('id'))
-      return "Group id is missing"
+      return response.status(400).json({ status: 400, message: "Group id is missing" })
 
     let group = await Group.findOrFail(params.id)
-    if (!group) return "Group not found"
-
+    if (!group) return response.status(400).json({ status: 400, message: "Group not found" })
 
     const data = request.only(['name'])
 
     group.name = data.name
     return await group.save()
-
   }
 
   /**
