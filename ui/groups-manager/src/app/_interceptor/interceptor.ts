@@ -11,13 +11,10 @@ export class AddHeaderInterceptor implements HttpInterceptor {
     public token: string;
 
     constructor(private authService: AuthService) {
-        this.token = this.authService.token
-
+        this.token = this.authService.token || sessionStorage.getItem('token')
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-
         var clonedRequest = req.clone({ headers: req.headers.set('Authorization', 'bearer ' + this.token) });
         return next.handle(clonedRequest);
     }
