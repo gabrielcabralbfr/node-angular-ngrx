@@ -19,3 +19,25 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+// Auth
+Route.group(() => {
+  Route.post('login', 'UserController.store')
+}).prefix('auth')
+
+
+// Users
+Route.group(() => {
+  Route.get('', 'UserController.index')
+  Route.post('signup', 'UserController.store')
+}).prefix('users')
+
+// Groups
+Route.resource('groups', 'GroupController').apiOnly()
+
+// Memberships
+Route.group(() => {
+  Route.get(':groupId/members', 'MembershipController.getGroupMembers')
+  Route.post('joinGroup', 'MembershipController.joinGroup')
+  Route.get(':groupId/members/:memberId/remove', 'MembershipController.removeGroupMember')
+}).prefix('membership')
