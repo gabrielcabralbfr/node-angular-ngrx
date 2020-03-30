@@ -14,4 +14,13 @@ export class UserService {
   login(credentials: any): Observable<any> {
     return this.http.post(`${environment.api}/auth/login`, credentials)
   }
+
+  getGroups(): Observable<any> {
+    return this.http.get(`${this.environment.api}/groups`)
+  }
+
+  getUser(email): Observable<any> {
+    return this.http.get(`${this.environment.api}/users/${email}`)
+  }
+
 }

@@ -11,8 +11,11 @@ export const initialState: AppState = {
 }
 export function reducer(state: AppState, action: any) {
     switch (action.type) {
-        case 'FILL_TOKEN': 
-            return {...state, token: action.payload}
+        case 'FILL_TOKEN':
+            return { ...state, token: action.payload }
+        case 'FILL_USER':
+            return { ...state, user: action.payload }
+
         default:
             return state
     }

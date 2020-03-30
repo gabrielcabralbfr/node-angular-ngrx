@@ -9,12 +9,16 @@ import { reducer } from './_state/reducer';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddHeaderInterceptor } from './_interceptor/interceptor';
 import { HomeComponent } from './_components/home/home.component';
+import { FilterGroupsPipe } from './_pipes/groups/filter-groups.pipe';
+import { FilterByKeyWordPipe } from './_pipes/filterByKeyword/filter-by-key-word.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    FilterGroupsPipe,
+    FilterByKeyWordPipe
   ],
   imports: [
     BrowserModule,

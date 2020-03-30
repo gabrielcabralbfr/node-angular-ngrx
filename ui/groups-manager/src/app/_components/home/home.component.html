@@ -1,1 +1,67 @@
-<p>home works!</p>
+<!-- <h4>Groups you've created</h4>
+<div class="group-container">
+    <div *ngFor="let group of groups | async | filterGroups:'owned'">
+        <div class="group-info">
+            <span class="group-name">{{ group.name }}</span>
+            <span class="group-action">ENTRAR</span>
+        </div>
+    </div>
+</div>
+
+<h4>Groups you've joined</h4>
+<div class="group-container">
+    <div *ngFor="let group of groups | async | filterGroups:'joined'">
+        <div class="group-info">
+            <span class="group-name">{{ group.name }}</span>
+            <span class="group-action">ENTRAR</span>
+        </div>
+    </div>
+</div>
+
+<h4>Groups to join</h4>
+<div class="group-container">
+    <div *ngFor="let group of groups | async | filterGroups:'notJoined'">
+        <div class="group-info">
+            <span class="group-name">{{ group.name }}</span>
+            <span class="group-action">ENTRAR</span>
+        </div>
+    </div>
+</div> -->
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-3 ">
+        <h5>Manage your memberships</h5>
+        <span class="border-bottom"> <input (keyup)="handleKeyUp($event)" class="search-input"  [(ngModel)]="searchValue" name="search-value" placeholder="Search a group here" type="text"> <i class="fas fa-search"></i></span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th class="text-center" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let group of groups | async | filterByKeyorwd: searchValue; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td class="">
+                        {{group.name}}
+                        <div class="d-inline" *ngIf="isGroupAdmin(group)">
+                            <span class="badge badge-warning"> admin</span>
+                        </div>
+                    </td>
+                    <td class="d-none d-md-flex justify-content-around">
+                        <i *ngIf="!isGroupMember(group)" class="fas fa-sign-in-alt"></i>
+                        <i *ngIf="isGroupMember(group)" class="fas fa-sign-out-alt"></i>
+                        <i class="fas fa-users"></i>
+                        <i  class="fas fa-pencil-alt"></i>
+                    </td>
+                    <td class="d-xs-block d-md-none float-right">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
