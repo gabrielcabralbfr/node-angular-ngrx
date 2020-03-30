@@ -40,5 +40,5 @@ Route.resource('groups', 'GroupController').apiOnly().middleware('auth')
 Route.group(() => {
   Route.get(':groupId/members', 'MembershipController.getGroupMembers')
   Route.post('joinGroup', 'MembershipController.joinGroup')
-  Route.get(':groupId/members/:memberId/remove', 'MembershipController.removeGroupMember')
+  Route.delete(':groupId/members/:memberId/remove', 'MembershipController.removeGroupMember')
 }).prefix('membership').middleware('auth')

@@ -48,8 +48,7 @@ class GroupController {
 
     if (validation.fails()) return response.status(400).json({ status: 400, message: validation.messages()[0].message })
 
-    await Group.create(data)
-    return auth.user
+    return await Group.create(data)
   }
   /**
    * Update group details.

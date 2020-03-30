@@ -20,13 +20,23 @@ class MembershipController {
     return await Group.query().where('id', groupId).with('members').fetch()
   }
 
-  async removeGroupMember({ params, response }) {
+  async removeGroupMember({ response, auth, params }) {
     const { groupId, memberId } = params
-    return await Membership
+    const group = await Group.findBy('id', groupId)
+    const membership = await Membership
       .query()
       .where('group_id', groupId)
       .andWhere('user_id', memberId)
-      .delete()
+      .fetch()
+    const isNotAdmin = group.admin_id !== auth.user.id
+    const notDeletingYourself = membership.user_id == auth.user.id
+    if (isNotAdmin && notDeletingYourself) return response.status(403).json({ status: 403, message: "Cannot remove member from a group you're not admin" })
+
+    return await Membership
+    .query()
+    .where('group_id', groupId)
+    .andWhere('user_id', memberId)
+    .delete()
   }
 
   async joinGroup({ request, response }) {
