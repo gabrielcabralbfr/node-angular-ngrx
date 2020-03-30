@@ -1,5 +1,25 @@
-<form action="">
-    <input [(ngModel)]="credentials.email" name="email" placeholder="Enter your email" type="text">
-    <input [(ngModel)]="credentials.password" name="userPass" placeholder="Enter your password" type="password">
-    <button (click)="doLogin()">Login</button>
-</form>
+<div class="container w-25 mt-5">
+
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" [(ngModel)]="credentials.email" name="email"
+                placeholder="Enter your email" type="text">
+        </div>
+        <div class="form-group">
+            <label for="userPass">Password</label>
+            <input class="form-control" [(ngModel)]="credentials.password" name="userPass"
+                placeholder="Enter your password" type="password">
+        </div>
+
+        <button class="btn btn-block btn-primary float-right" (click)="doLogin()">
+            <span *ngIf="!isLoggingIn">Login</span>
+            <span *ngIf="isLoggingIn">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </span>
+
+        </button>
+    </form>
+</div>
