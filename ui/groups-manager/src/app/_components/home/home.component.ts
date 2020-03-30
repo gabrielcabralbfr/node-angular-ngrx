@@ -65,36 +65,36 @@ export class HomeComponent implements OnInit {
           if (group.showingActions) group.showingActions = false
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => alert("Something wrong happened. Please, try again."))
   }
 
   joinGroup(group): void {
     this.membershipService.joinGroup(this.user.id, group.id).toPromise()
       .then(response => {
-        console.log(response);
-
         if (response) {
           group.members.push(this.user)
           if (group.showingActions) group.showingActions = false
 
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => alert("Something wrong happend. Please, try again"))
   }
   createGroup(): void {
-    console.log(this.newGroupName);
     this.membershipService.createNewGroup(this.newGroupName).toPromise()
-      .then(response => {
-        console.log(response);
-        if (response) {
-          response.members = []
-          response.members.push(this.user)
-          this.groups.push(response)
+      .then(group => {
+        if (group) {
+          group.showingMembers = false
+          group.isEditing = false
+          group.showingActions = false
 
+          group.members = []
+          group.members.push(this.user)
+          this.groups.push(group)
+          this.newGroupName = ''
           $('#groupModal').modal('hide')
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => alert("Something wrong happend. Please, try again"))
   }
 
   toggleEdit(group): void {
@@ -103,10 +103,8 @@ export class HomeComponent implements OnInit {
 
   }
   updateGroup(group): void {
-    console.log(name);
     this.membershipService.updateGroup(group).toPromise()
       .then(response => {
-        console.log(response);
         this.toggleEdit(group)
       })
       .catch(error => alert("error"))

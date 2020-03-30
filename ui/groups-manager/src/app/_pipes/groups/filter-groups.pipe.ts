@@ -25,7 +25,6 @@ export class FilterGroupsPipe implements PipeTransform {
 
     if (hasJoinedArgument) {
       return groups.filter(group => {
-        // console.log("INCLUI?", group.members.includes(user));
         let isNotAdmin = group.admin_id !== user.id
         let isAMember = group.members.filter(member => member.id === user.id).length > 0
         return isNotAdmin && isAMember

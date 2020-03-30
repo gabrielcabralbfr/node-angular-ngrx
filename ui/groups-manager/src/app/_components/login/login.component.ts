@@ -24,12 +24,8 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     this.isLoggingIn = true
-    // console.log(this.credentials);
-
     this.userService.login(this.credentials).toPromise()
       .then(response => {
-        console.log(response);
-
         if (response) {
           this.authService.token = response.token
           sessionStorage.setItem('token', response.token)
@@ -50,8 +46,6 @@ export class LoginComponent implements OnInit {
         }
       })
       .catch(error => {
-        console.log(error);
-
         this.isLoggingIn = false
         alert("Falha ao fazer login")
       })

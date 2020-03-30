@@ -2,12 +2,12 @@
     <p class="navbar-brand text-uppercase">
         Code Challenge</p>
     <span class="text-white text-right w-100">
-        <span [routerLink]="['/login']" routerLinkActive="router-link-active" class="p-3" *ngIf="!user">
+        <span [routerLink]="['/login']" routerLinkActive="active" class="p-1 header-nav pointer" *ngIf="!user">
             Login
             <i data-toggle="tooltip" data-placement="top" title="Login" class="fas fa-sign-in-alt ml-2"></i>
         </span>
 
-        <span [routerLink]="['/signup']" routerLinkActive="router-link-active" class="p-3" *ngIf="!user">
+        <span [routerLink]="['/signup']" routerLinkActive="active" class="p-1 ml-4 header-nav pointer" *ngIf="!user">
             Sign up
             <i data-toggle="tooltip" data-placement="top" title="Sign up" class="fas fa-user-plus ml-2">
             </i>
