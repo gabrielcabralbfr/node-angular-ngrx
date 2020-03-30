@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
       groups.map(group => {
         group.showingMembers = false
         group.isEditing = false
+        group.showingActions = false
       })
 
       // Waiting to force loading on screen
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
   }
   showGroupMembers(group): void {
     if (this.isGroupAdmin(group)) group.showingMembers = !group.showingMembers
+    if (group.showingActions) group.showingActions = false
   }
 
   removeUserFromGroup(user, group): void {
@@ -60,6 +62,7 @@ export class HomeComponent implements OnInit {
       .then(response => {
         if (response) {
           group.members.splice(group.members.indexOf(user))
+          if (group.showingActions) group.showingActions = false
         }
       })
       .catch(error => console.log(error))
@@ -72,6 +75,8 @@ export class HomeComponent implements OnInit {
 
         if (response) {
           group.members.push(this.user)
+          if (group.showingActions) group.showingActions = false
+
         }
       })
       .catch(error => console.log(error))
@@ -94,6 +99,8 @@ export class HomeComponent implements OnInit {
 
   toggleEdit(group): void {
     if (this.isGroupAdmin(group)) group.isEditing = !group.isEditing
+    if (group.showingActions) group.showingActions = false
+
   }
   updateGroup(group): void {
     console.log(name);
@@ -103,5 +110,8 @@ export class HomeComponent implements OnInit {
         this.toggleEdit(group)
       })
       .catch(error => alert("error"))
+  }
+  toggleActions(group): void {
+    group.showingActions = !group.showingActions
   }
 }

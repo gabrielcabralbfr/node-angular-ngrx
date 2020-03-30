@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3 ">
-        <h5>Manage your memberships <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#groupModal">NEW GROUP</button>
+        <h5>Manage your memberships <button type="button" class="btn btn-sm btn-dark" data-toggle="modal"
+                data-target="#groupModal">NEW GROUP</button>
         </h5>
         <span class="border-bottom d-flex align-items-center">
             <input class="search-input" [(ngModel)]="searchValue" name="search-value" placeholder="Search a group here"
@@ -15,8 +16,11 @@
                     <td (click)="showGroupMembers(group)">
                         <span *ngIf="!group.isEditing">{{ group.name }}</span>
                         <span *ngIf="group.isEditing">
-                            <input autofocus [size]="group.name.length + 1" (click)="$event.stopPropagation()" [(ngModel)]="group.name" [id]="group.id" name="group" class="border-bottom border-none" type="text">
-                            <i (click)="updateGroup(group); $event.stopPropagation()" class="fas fa-check pl-2 pointer"></i>
+                            <input autofocus [size]="group.name.length + 1" (click)="$event.stopPropagation()"
+                                [(ngModel)]="group.name" [id]="group.id" name="group" class="border-bottom border-none"
+                                type="text">
+                            <i (click)="updateGroup(group); $event.stopPropagation()"
+                                class="fas fa-check pl-2 pointer"></i>
                         </span>
                         <div class="d-inline ml-2 crown" *ngIf="isGroupAdmin(group)">
                             <i data-toggle="tooltip" data-placement="top" title="Group admin" class="fas fa-crown"></i>
@@ -42,7 +46,9 @@
                             <i (click)="joinGroup(group)" data-toggle="tooltip" data-placement="top" title="Join Group"
                                 *ngIf="!isGroupMember(group)" class="fas fa-sign-in-alt"></i>
                             <i data-toggle="tooltip" data-placement="top" title="Leave Group"
-                                *ngIf="isGroupMember(group)" (click)="removeUserFromGroup(this.user, group); $event.stopPropagation()" class="fas fa-sign-out-alt"></i>
+                                *ngIf="isGroupMember(group)"
+                                (click)="removeUserFromGroup(this.user, group); $event.stopPropagation()"
+                                class="fas fa-sign-out-alt"></i>
                         </span>
 
                         <span *ngIf="isGroupAdmin(group)" class="pointer" (click)="showGroupMembers(group)">
@@ -64,8 +70,14 @@
                             </i>
                         </span>
                     </td>
-                    <td class="d-xs-block d-md-none float-right">
-                        <i class="fas fa-ellipsis-v"></i>
+                    <td class="d-xs-block d-md-none float-right position-relative">
+                        <i (click)="toggleActions(group)" class="fas fa-ellipsis-v"></i>
+                        <div class="position-absolute border-bottom border-top actions-container" *ngIf="group.showingActions">
+                            <div (click)="joinGroup(group)" class="border-bottom pb-2" *ngIf="!isGroupMember(group)">Join Group</div>
+                            <div (click)="removeUserFromGroup(this.user, group); $event.stopPropagation()" class="border-bottom pb-2" *ngIf="isGroupMember(group)">Leave Group</div>
+                            <div (click)="showGroupMembers(group)" class="border-bottom pb-2" *ngIf="isGroupAdmin(group)">See members</div>
+                            <div (click)="toggleEdit(group)"  class="border-bottom pb-2" *ngIf="isGroupAdmin(group)">Edit</div>
+                        </div>
                     </td>
                 </tr>
                 <tr *ngIf="(groups | filterByKeyorwd: searchValue)?.length === 0">
@@ -96,7 +108,8 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <input type="text" name="groupName" [(ngModel)]="newGroupName" class="form-control" placeholder="Group name" aria-label="name">
+                    <input type="text" name="groupName" [(ngModel)]="newGroupName" class="form-control"
+                        placeholder="Group name" aria-label="name">
                 </div>
             </div>
             <div class="modal-footer">
