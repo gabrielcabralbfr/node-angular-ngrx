@@ -30,6 +30,7 @@ Route.group(() => {
 Route.group(() => {
   Route.get('', 'UserController.index')
   Route.post('signup', 'UserController.store')
+  Route.get(':userEmail', 'UserController.show')
 }).prefix('users')
 
 // Groups

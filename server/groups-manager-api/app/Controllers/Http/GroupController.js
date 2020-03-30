@@ -28,19 +28,7 @@ class GroupController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    return await Group.query().with('admin').fetch()
-  }
-
-  /**
-   * Render a form to be used for creating a new group.
-   * GET groups/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create({ request, response, view }) {
+    return await Group.query().with('admin').with('members').fetch()
   }
 
   /**
@@ -63,19 +51,6 @@ class GroupController {
     await Group.create(data)
     return auth.user
   }
-
-  /**
-   * Display a single group.
-   * GET groups/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show({ params, request, response, view }) {
-  }
-
   /**
    * Update group details.
    * PUT or PATCH groups/:id

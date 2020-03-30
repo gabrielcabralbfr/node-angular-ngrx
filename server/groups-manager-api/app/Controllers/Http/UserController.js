@@ -59,6 +59,14 @@ class UserController {
   async update({ params, request, response }) {
   }
 
+  async show({ params, request, response }) {
+    if (!Object.keys(params).includes('userEmail')) return response.status(400).json({status: 400, message: "Missing user Email"})
+
+    const user = await User.findBy('email',params.userEmail)
+    return user
+  }
+
+
   /**
    * Delete a user with id.
    * DELETE users/:id
