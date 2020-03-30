@@ -3,5 +3,30 @@
 }
 
 .search-input:focus {
-    outline: none;
-  }
+  outline: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: #c5c3c3;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.crown {
+  color: #ffc107;
+}
+.fa-user,
+.fa-trash {
+  font-size: 13px !important;
+}
+
+.border-none {
+  border: none;
+  outline: none;
+}
+.border-none:focus {
+  outline: none;
+}

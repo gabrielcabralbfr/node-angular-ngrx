@@ -23,4 +23,9 @@ export class UserService {
     return this.http.get(`${this.environment.api}/users/${email}`)
   }
 
+  createUser(user): Observable<any> {
+    return this.http.post(`${this.environment.api}/users/signup`, user)
+
+  }
+
 }

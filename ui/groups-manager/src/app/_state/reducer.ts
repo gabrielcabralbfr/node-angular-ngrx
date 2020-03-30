@@ -15,6 +15,8 @@ export function reducer(state: AppState, action: any) {
             return { ...state, token: action.payload }
         case 'FILL_USER':
             return { ...state, user: action.payload }
+        case 'CLEAR_STATE':
+            return { }
 
         default:
             return state
