@@ -16,14 +16,16 @@ export class SignUpComponent implements OnInit {
   public user: Partial<User> = {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    passwordConfirmation: ''
   }
   public isSigningUp: boolean = false
   constructor(private userService: UserService, private store: Store<AppState>, private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
   }
-  signUp(): void {
+  signUp(signupForm): void {
+    if(signupForm.form.status === 'invalid') return
     this.isSigningUp = true
     const userData = {
       email: this.user.email,
