@@ -11,6 +11,8 @@ import { AddHeaderInterceptor } from './_interceptor/interceptor';
 import { HomeComponent } from './_components/home/home.component';
 import { FilterGroupsPipe } from './_pipes/groups/filter-groups.pipe';
 import { FilterByKeyWordPipe } from './_pipes/filterByKeyword/filter-by-key-word.pipe';
+import { HeaderComponent } from './_components/header/header.component';
+import { SignUpComponent } from './_components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FilterByKeyWordPipe } from './_pipes/filterByKeyword/filter-by-key-word
     LoginComponent,
     HomeComponent,
     FilterGroupsPipe,
-    FilterByKeyWordPipe
+    FilterByKeyWordPipe,
+    HeaderComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

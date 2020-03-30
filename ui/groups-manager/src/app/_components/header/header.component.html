@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-dark">
+    <p class="navbar-brand text-uppercase">
+        Code Challenge</p>
+    <span class="text-white text-right w-100">
+        <span [routerLink]="['/login']" routerLinkActive="router-link-active" class="p-3" *ngIf="!user">
+            Login
+            <i data-toggle="tooltip" data-placement="top" title="Login" class="fas fa-sign-in-alt ml-2"></i>
+        </span>
+
+        <span [routerLink]="['/signup']" routerLinkActive="router-link-active" class="p-3" *ngIf="!user">
+            Sign up
+            <i data-toggle="tooltip" data-placement="top" title="Sign up" class="fas fa-user-plus ml-2">
+            </i>
+        </span>
+
+        <span (click)="logout()" class="p-3 pointer" *ngIf="user">
+            Logout
+            <i data-toggle="tooltip" data-trigger="hover" data-placement="top" title="Logout" class="fas fa-sign-out-alt ml-2"></i>
+        </span>
+    </span>
+</nav>

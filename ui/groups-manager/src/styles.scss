@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.spinner-border {
+    border: .15em solid #e1e1e1;
+    border-right-color: transparent;
+}
+
+html, body {
+    height: 100%;
+}
