@@ -1,6 +1,6 @@
 # Pre requisites
     - Docker
 # Running locally
-    - Create rename .env.example to .env on /server and root directories
-    - run `docker-comppose up` in terminal
+    - Rename .env.example to .env on /server/groups-manager-api directory
+    - CD /docker and run `docker-compose up` in terminal
     - Access http://localhost:4200
