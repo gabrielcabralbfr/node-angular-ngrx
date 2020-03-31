@@ -4,8 +4,10 @@ WORKDIR /usr/app
 
 COPY package.json .
 
-RUN npm i -g @adonisjs/cli
 RUN npm i
+RUN npm i -g @adonisjs/cli
+RUN adonis migration:run
+RUN node --harmony_proxies ace migration:run --force
 
 COPY . .
 
