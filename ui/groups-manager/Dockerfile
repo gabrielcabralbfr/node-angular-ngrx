@@ -1,12 +1,7 @@
-FROM node:alpine AS builder
-
-WORKDIR /app
-
+FROM node:alpine
+ 
+WORKDIR /usr/app
 COPY . .
 
-RUN npm install && \
-    npm run build
-
-FROM nginx:alpine
-
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+RUN npm install -g @angular/cli 
+RUN npm install

@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+        context: ../ui/groups-manager
+    restart: 'always'
+    ports: 
+      - "4200:4200"
+    command: >
+        /bin/sh -c "ng serve --host 0.0.0.0 --port 4200"
+  webserver:
+    build: 
+      context: ../server/groups-manager-api
+    container_name: 'api'
+    restart: 'always'
+    ports:
+      - "3333:3333"
+    links: 
+      - pgsql
+    volumes: 
+      - ../server/groups-manager-api:/usr/app
+    command: >
+        /bin/sh -c "node ace migration:run --force
+        && adonis serve --dev"
+
+  pgsql:
+    build:
+      context: "./bin/postgres"
+    container_name: 'pgsql'
+    restart: 'always'
+    ports:
+      - "5433:5432"
+    volumes: 
+      - ./data/pgsql:/var/lib/postgresql/data 
+    environment:
+      POSTGRES_PASSWORD: "gb"
+      POSTGRES_USER: "gb"
+      POSTGRES_DB: "group_manager_db"
