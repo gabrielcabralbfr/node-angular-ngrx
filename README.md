@@ -1,2 +1,5 @@
-# groups-membership
-A simple Node/Angular application that manages users, roles, groups and memberships with containerization
+# Pre requisites
+    - Docker
+# Running locally
+    - run `docker-comppose up` in terminal
+    - Access http://localhost:4200
