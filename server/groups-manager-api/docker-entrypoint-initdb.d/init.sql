@@ -1,0 +1,3 @@
+CREATE USER gb;
+CREATE DATABASE group_manager_db;
+GRANT ALL PRIVILEGES ON DATABASE docker TO docker;
